@@ -57,7 +57,6 @@ const MenuComponent = () => {
                     <div id="collapseBootstrap2" className="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Productos</h6>
-                            <a className="collapse-item" href="/regProd">Registro</a>
                             <a className="collapse-item" href="/gestionprod">Consultas</a>
 
                         </div>
