@@ -72,7 +72,6 @@ const MenuComponent = () => {
                             <div id="collapseForm" className="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
                                 <div className="bg-white py-2 collapse-inner rounded">
                                     <h6 className="collapse-header">Usuarios</h6>
-                                    <Link className="collapse-item" to="/gestionprod">Registro</Link>
                                     <Link className="collapse-item" to="/gestionUser">Gestión de Usuarios</Link>
                                 </div>
                             </div>
