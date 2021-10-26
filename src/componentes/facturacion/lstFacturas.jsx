@@ -3,7 +3,7 @@ import MenuComponent from '../home/menu';
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2'
-import { buscarCliente, consultarDatabase, guardarDatabase } from '../config/firebase';
+import { actualizarDocumentoDatabase, buscarCliente, consultarDatabase, guardarDatabase } from '../config/firebase';
 
 
 
@@ -16,7 +16,7 @@ export const GestionFacturacionComponent = () => {
 
     let [data, setData] = useState([]);
 
-    let [productos, setProductos] = useState([{}]);
+    let [productos, setProductos] = useState([]);
 
     let [total, setTotal] = useState(0)
 
@@ -57,7 +57,7 @@ export const GestionFacturacionComponent = () => {
 
     const handleCodigo = (e) => {
         setCodigo(e.target.value)
-        console.log(e.target.value)
+        setCantidad(1)
     }
 
     useEffect(() => {
@@ -100,8 +100,9 @@ export const GestionFacturacionComponent = () => {
         prods.push(productoVenta)
 
 
-        setProductos(productos.concat(prods))
-
+        setProductos(productos.concat(productoVenta))
+        setCantidad(1)
+        
 
 
     }
@@ -126,12 +127,18 @@ export const GestionFacturacionComponent = () => {
     }
 
 
-    const registrarFactura = (e) => {
+    const registrarFactura = async (e) => {
 
         e.preventDefault()
         const usuario = JSON.parse(sessionStorage.getItem("usuario"))
 
+        const facturas = await consultarDatabase("facturas")
+        const facturacion = facturas[0]
+        facturacion.consecutivo = facturacion.consecutivo +1
+        
+
         const facturaVenta = {
+            consecutivo : facturacion.consecutivo,
             cliente: cliente,
             productos: productos,
             fechaFactura: new Date(),
@@ -139,14 +146,21 @@ export const GestionFacturacionComponent = () => {
             vendedor:usuario
         }
 
-        guardarDatabase("ventas", facturaVenta)
+        actualizarDocumentoDatabase("facturas",facturacion.id,facturacion)
+
+        console.log(JSON.stringify(facturaVenta))
+        const respuesta = await guardarDatabase("ventas", facturaVenta)
+        
+
+        const idFactura = respuesta._key.path.segments[1]
+
 
         Swal.fire({
             icon: "success",
             text: "Se ha registrado su venta "
         })
 
-        history.push("/pdf")
+        history.push("/visualizarFactura/"+idFactura)
 
 
 
@@ -183,7 +197,7 @@ export const GestionFacturacionComponent = () => {
                                             <h6 className="m-0 font-weight-bold text-primary">Información Básica</h6>
                                         </div>
                                         <div className="card-body">
-                                            <label for="select2Single">Documento comprador</label>
+                                            <label htmlFor="select2Single">Documento comprador</label>
                                             <input className="form-control  mb-3" type="number"
                                                 maxLength="10" placeholder="Número de documento" onChange={handleDocumento}
                                                 onKeyPress={event => {
@@ -191,12 +205,12 @@ export const GestionFacturacionComponent = () => {
                                                         search()
                                                     }
                                                 }} />
-                                            <label for="select2Single">Nombre del cliente</label>
+                                            <label htmlFor="select2Single">Nombre del cliente</label>
                                             <input className="form-control  mb-3" type="text" maxLength="10"
                                                 placeholder="Nombre del cliente" defaultValue={nombreCliente} />
 
                                             <div className="form-group">
-                                                <label for="select2Single">Servicios</label>
+                                                <label htmlFor="select2Single">Servicios</label>
                                                 <select className="select2-single form-control" name="state" id="servicio"
                                                     onChange={handleCodigo}>
                                                     <option noselected="true"  >Seleccione el servicio</option>
@@ -212,9 +226,9 @@ export const GestionFacturacionComponent = () => {
                                                 </select>
                                             </div>
 
-                                            <label for="cantidad">Cantidad</label>
+                                            <label htmlFor="cantidad">Cantidad</label>
                                             <input className="form-control  mb-3" type="number" maxLength="10"
-                                                min="1" max="100" placeholder="Cantidad" defaultValue={1} onChange={handleCantidad} />
+                                                min="1" max="100" placeholder="Cantidad" value={cantidad} defaultValue={cantidad} onChange={handleCantidad} />
 
                                             <button onClick={agregarProducto} type="submit" className="btn btn-primary">Agregar</button>
 
@@ -255,10 +269,10 @@ export const GestionFacturacionComponent = () => {
                                                         ))
                                                     ) : (
                                                         <tr>
-                                                            <td>ff</td>
-                                                            <td>fff</td>
-                                                            <td>ff</td>
-                                                            <td>f</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
                                                             <td ></td>
                                                         </tr>
                                                     )

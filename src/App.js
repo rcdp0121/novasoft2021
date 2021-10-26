@@ -10,6 +10,7 @@ import { GestionFacturacionComponent } from './componentes/facturacion/lstFactur
 import { datosUsuario } from './componentes/config/firebase';
 import ConsultaFacturasComponent from './componentes/facturacion/consultarVentas';
 import { EditarFacturacionComponent } from './componentes/facturacion/editarFactura';
+import { VisualizarFactura } from './componentes/facturacion/visualizarFactura';
 
 
 
@@ -46,6 +47,7 @@ function App() {
             <Route exact path="/ventas" component={GestionFacturacionComponent}></Route>
             <Route exact path="/lstventas" component={ConsultaFacturasComponent}></Route>
             <Route exact path="/editVentas/:id" component={EditarFacturacionComponent}></Route>
+            <Route exact path="/visualizarFactura/:id" component={VisualizarFactura}></Route>
             
 
           </Switch>

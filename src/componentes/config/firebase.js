@@ -30,7 +30,7 @@ export const guardarDatabase = async (nombreColeccion, data) => {
 
   try {
     const respuesta = await addDoc(collection(database, nombreColeccion), data)
-   
+    //console.log("registrando factura "+)
     return respuesta
   } catch (e) {
     throw new Error(e)
