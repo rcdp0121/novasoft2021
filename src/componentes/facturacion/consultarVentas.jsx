@@ -3,10 +3,10 @@ import NavBarComponent from '../home/menuSuperior';
 import MenuComponent from '../home/menu';
 import React, { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
-import { consultarDatabase, guardarDatabase, actualizarDocumentoDatabase } from '../config/firebase';
+import { consultarDatabase, actualizarDocumentoDatabase } from '../config/firebase';
 import { format } from 'date-fns-tz'
 import { Date } from 'prismic-reactjs';
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const ConsultaFacturasComponent = () => {
@@ -42,9 +42,7 @@ const ConsultaFacturasComponent = () => {
         setDescripcion(e.target.value)
     }
 
-    const handleActivo = (e) => {
-        setActivo(e.target.value)
-    }
+    
 
     const handleNombre = (e) => {
         setNombre(e.target.value)
@@ -56,6 +54,7 @@ const ConsultaFacturasComponent = () => {
     }
 
 
+    
 
 
     useEffect(() => {
@@ -98,7 +97,7 @@ const ConsultaFacturasComponent = () => {
             codigo: codigo,
             nombre: nombre,
             valor: valor,
-            estado: activo == 1 ? true : false,
+            estado: activo === 1 ? true : false,
             impuesto: impuesto
         }
 
@@ -199,7 +198,11 @@ const ConsultaFacturasComponent = () => {
                                                                               <i className="fa fa-edit" aria-hidden="true">
                                                                                   </i>
                                                                                   </Link></td>
-                                                                    <td><a href="#" className="btn btn-sm btn-primary"><i className="fa fa-print" aria-hidden="true"></i></a></td>
+                                                                    <td><Link to={`/visualizarFactura/${venta.id}`}
+                                                                          className="btn btn-sm btn-primary">
+                                                                              <i className="fa fa-print" aria-hidden="true">
+                                                                                  </i>
+                                                                                  </Link></td>
                                                                 </tr>
                                                             ))
                                                         ) : (

@@ -40,9 +40,7 @@ const GestionProductoComponent = () => {
         setDescripcion(e.target.value)
     }
 
-    const handleActivo = (e) => {
-        setActivo(e.target.value)
-    }
+   
 
     const handleNombre = (e) => {
         setNombre(e.target.value)
@@ -96,7 +94,7 @@ const GestionProductoComponent = () => {
             codigo: codigo,
             nombre: nombre,
             valor: valor,
-            estado: activo == 1 ? true : false,
+            estado: activo === 1 ? true : false,
             impuesto: impuesto
         }
 

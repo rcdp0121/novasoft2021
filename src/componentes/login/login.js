@@ -32,7 +32,7 @@ const LoginComponent = () => {
                 console.log(usuario)
                 Swal.fire({
                     icon: "success",
-                    text: "Se ha validado el acceso..! \nUsted es un usuario " + usuario.perfil
+                    text: "Se ha validado el acceso..! Usted es un usuario " + usuario.perfil
                 })
 
                 sessionStorage.setItem("usuario", JSON.stringify(usuario))
@@ -57,7 +57,7 @@ const LoginComponent = () => {
 
     //autenticar con cuenta de gmail
     const respuestaGoogle = async (respuesta) => {
-        
+       
         if (respuesta.profileObj) {
             
             const usuario = await validarUsuario("usuarios",respuesta.profileObj.email )
@@ -67,7 +67,7 @@ const LoginComponent = () => {
                     icon: "success",
                     text: "Se ha validado el acceso..! \nUsted es un usuario " + usuario.perfil
                 })
-
+                
                 sessionStorage.setItem("usuario", JSON.stringify(usuario))
                 history.push("/home")
             } else {
@@ -135,7 +135,7 @@ const LoginComponent = () => {
                                             <div className="text-center">
                                                 <h1 className="h4 text-gray-900 mb-4">Login</h1>
                                                 <a href="login.html" className="btn btn-google btn-block tm-4">
-                                                    <img src={logo} height="100" width="100"></img>
+                                                    <img src={logo} height="100" width="100" alt="Novasoft"></img>
                                                 </a>
                                             </div>
                                             <form className="user" onSubmit={autenticar}>

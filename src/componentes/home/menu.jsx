@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 
 const MenuComponent = () => {
 
@@ -48,20 +48,23 @@ const MenuComponent = () => {
                     
                 </li>
 }
+{usuario.perfil === "administrador" &&
                 <li className="nav-item">
                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"
                         aria-expanded="true" aria-controls="collapseBootstrap2">
                         <i className="far fa-fw fa-window-maximize"></i>
                         <span>Productos</span>
                     </a>
+                    
                     <div id="collapseBootstrap2" className="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Productos</h6>
-                            <a className="collapse-item" href="/gestionprod">Consultas</a>
+                            <a className="collapse-item" href="/gestionprod">Gestión</a>
 
                         </div>
                     </div>
                 </li>
+}
                 {usuario.perfil === "administrador" &&
                         <li className="nav-item">
                             <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"

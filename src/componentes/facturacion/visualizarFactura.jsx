@@ -1,18 +1,15 @@
 import NavBarComponent from '../home/menuSuperior';
 import MenuComponent from '../home/menu';
 import React, { useState, useEffect } from 'react'
-import Swal from 'sweetalert2'
-import { consultarDocumentoDatabase, guardarDatabase, actualizarDocumentoDatabase } from '../config/firebase';
-import { format } from 'date-fns-tz'
+import { consultarDocumentoDatabase } from '../config/firebase';
 import { Date } from 'prismic-reactjs';
-import { Link, NavLink } from 'react-router-dom'
-import { useParams, useHistory } from 'react-router';
+import { useParams } from 'react-router';
 
 const estadoInicial = { "id": "2USMCMat7Elr0cKZAm1g", "productos": [], "total": 5292000, "fechaFactura": { "seconds": 1634509722, "nanoseconds": 305000000 }, "cliente": { "nombres": "CARLOS MARTINEZ CAMARGO", "DIRECCION": "BARRANQUILLA", "documento": "123456", "id": "aj9id80ji21wQoCbZoD6" }, "vendedor": { "id": "SGr8R6JvPc0GOHiQ3uOf", "nombres": "Rafael", "codigo": "v1GdDeRF6hSzks8DUAc5N6FG2ki2", "perfil": "administrador", "activo": true, "email": "rafaeldavid0121@gmail.com", "apellidos": "Carrascal" } }
 
 export const VisualizarFactura = () => {
 
-    const logo = "./../images/logo.png"
+  
 
     //datos de la factura
 
@@ -28,7 +25,7 @@ export const VisualizarFactura = () => {
         //setTotal(factura.total)
 
 
-    }, []);
+    }, [id]);
 
     const cargarDatosFactura = async (id) => {
 

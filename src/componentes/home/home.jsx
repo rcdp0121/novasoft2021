@@ -7,7 +7,8 @@ import NavBarComponent from './menuSuperior';
 
 const HomeComponent = () => {
 
-
+    const user = sessionStorage.getItem("usuario")
+    console.log("usuario home : "+user)
     return (
         <>
             <div id="wrapper">

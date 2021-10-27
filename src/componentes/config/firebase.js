@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase/firestore'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 // Metodos de interaccion con la base de datos
 import { addDoc, collection, getDocs, query, getDoc, doc, updateDoc, deleteDoc, where } from 'firebase/firestore'
-import { useHistory } from 'react-router';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC2-I3QyI3VfrCHyjAE5vK81LzCxNeCycE",
@@ -84,7 +84,7 @@ export const actualizarDocumentoDatabase = async (nombreColeccion, id, data) => 
   try {
    
     const respuesta = await updateDoc(doc(database, nombreColeccion, id), data)
-    
+    return respuesta
   } catch (e) {
     throw new Error(e)
   }
@@ -159,6 +159,7 @@ export const loginUsuario = async (email, password) => {
 export const logOutUsuario = async () => {
   try {
     const respuesta = await signOut(auth)
+    sessionStorage.clear()
    
   } catch (e) {
     throw new Error(e)
