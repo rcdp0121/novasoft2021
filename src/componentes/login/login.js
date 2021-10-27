@@ -153,7 +153,7 @@ const LoginComponent = () => {
                                                 </div>
                                                 <hr />
                                                 <GoogleLogin
-                                                    clientId="495139720782-gdel9h3qm1sa4crmoea90osspr1kchnn.apps.googleusercontent.com"
+                                                    clientId="883830207830-u0v8odt1kqnl35hipg5jfkk19v2mlaj1.apps.googleusercontent.com"
                                                     render={renderProps => (
                                                         <button className="btn btn-primary btn-block"
                                                             onClick={renderProps.onClick}
